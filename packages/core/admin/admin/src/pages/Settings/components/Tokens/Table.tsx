@@ -71,13 +71,13 @@ const Table = ({
   const { trackUsage } = useTracking();
   const formatter = useCollator(locale);
 
-  const isDescending = sortOrder.toUpperCase() === 'DESC';
-
   const sortedTokens = React.useMemo(() => {
-    const tokensByName = [...tokens].sort((a, b) => formatter.compare(a.name, b.name));
-
-    return isDescending ? tokensByName : tokensByName.reverse();
-  }, [tokens, formatter, isDescending]);
+    return [...tokens].sort((a, b) => {
+      return sortOrder === 'DESC'
+        ? formatter.compare(b.name, a.name)
+        : formatter.compare(a.name, b.name);
+    });
+  }, [tokens, formatter, sortOrder]);
 
   const { canDelete, canUpdate, canRead } = permissions;
 
