@@ -605,8 +605,6 @@ const RelationsInput = ({
     // Return early if there is no relation to the document
     if (!isRelatedToCurrentDocument) return;
 
-    const { idsToInclude, idsToOmit } = getPendingRelationIds(field.value);
-
     searchForTrigger({
       model,
       targetField,
@@ -614,8 +612,8 @@ const RelationsInput = ({
         ...currentDocumentMeta.params,
         id: id ?? '',
         pageSize: 10,
-        idsToInclude,
-        idsToOmit,
+        idsToInclude: field.value?.disconnect?.map((rel) => rel.id.toString()) ?? [],
+        idsToOmit: field.value?.connect?.map((rel) => rel.id.toString()) ?? [],
         ...searchParamsDebounced,
       },
     });
