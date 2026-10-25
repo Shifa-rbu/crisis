@@ -226,18 +226,12 @@ const generateResponsiveFormats = async (file: UploadableFile) => {
   const breakpoints = getBreakpoints();
   const results = [];
 
-  // Largest first: as soon as a breakpoint no longer shrinks the image, the image is
-  // already smaller than the remaining ones.
-  const keysBySize = Object.keys(breakpoints).sort((a, b) => breakpoints[b] - breakpoints[a]);
-
-  for (const key of keysBySize) {
+  for (const key of Object.keys(breakpoints)) {
     const breakpoint = breakpoints[key];
 
-    if (!breakpointSmallerThan(breakpoint, originalDimensions)) {
-      break;
+    if (breakpointSmallerThan(breakpoint, originalDimensions)) {
+      results.push(await generateBreakpoint(key, { file, breakpoint }));
     }
-
-    results.push(await generateBreakpoint(key, { file, breakpoint }));
   }
 
   return results;
