@@ -238,13 +238,12 @@ const makeWebhookValidationSchema = ({ formatMessage }: Pick<IntlShape, 'formatM
           defaultMessage: 'Url is required',
         })
       )
-      .test(
-        'supported-url',
+      .matches(
+        URL_REGEX,
         formatMessage({
           id: 'Settings.webhooks.validation.url.regex',
           defaultMessage: 'The value must be a valid Url',
-        }),
-        isSupportedUrl
+        })
       ),
     headers: yup.lazy((array) => {
       const baseSchema = yup.array();
