@@ -46,7 +46,7 @@ const sendTemplatedEmail = (
         : [name];
     });
 
-  const allowedInterpolationVariables = collectVariableNames(data as Record<string, unknown>);
+  const allowedInterpolationVariables = objects.keysDeep(data);
   const interpolate = createStrictInterpolationRegExp(allowedInterpolationVariables, 'g');
 
   const templatedAttributes = attributes.reduce(
