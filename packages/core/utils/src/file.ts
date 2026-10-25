@@ -9,15 +9,8 @@ const bytesToHumanReadable = (bytes: number) => {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
   if (bytes === 0) return '0 Bytes';
 
-  let unit = 0;
-  let size = bytes;
-
-  while (size > 1 && unit < sizes.length - 1) {
-    size /= 1000;
-    unit += 1;
-  }
-
-  return `${Math.round(size)} ${sizes[unit]}`;
+  const i = parseInt(`${Math.floor(Math.log(bytes) / Math.log(1000))}`, 10);
+  return `${Math.round(bytes / 1000 ** i)} ${sizes[i]}`;
 };
 
 const streamToBuffer = (stream: NodeJS.ReadableStream): Promise<Buffer> =>
