@@ -10,12 +10,6 @@ interface RoleRowProps extends Pick<AdminRole, 'id' | 'name' | 'description' | '
   cursor?: string;
 }
 
-const getRowAction = (icons: RoleRowProps['icons']) => {
-  const safeActions = icons.length > 1 ? icons.slice(0, -1) : icons;
-
-  return safeActions.find((action) => typeof action.onClick === 'function');
-};
-
 const RoleRow = ({
   id,
   name,
@@ -27,7 +21,7 @@ const RoleRow = ({
   cursor,
 }: RoleRowProps) => {
   const { formatMessage } = useIntl();
-  const editObject = getRowAction(icons);
+  const [, editObject] = icons;
 
   const usersCountText = formatMessage(
     {
