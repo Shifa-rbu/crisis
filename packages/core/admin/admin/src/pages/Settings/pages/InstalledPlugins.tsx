@@ -112,12 +112,18 @@ const InstalledPlugins = () => {
                   <Tr key={plugin.name}>
                     <Td>
                       <Typography textColor="neutral800" variant="omega" fontWeight="bold">
-                        {formatMessage(messages.displayName)}
+                        {formatMessage({
+                          id: `global.plugins.${plugin.name}`,
+                          defaultMessage: plugin.displayName,
+                        })}
                       </Typography>
                     </Td>
                     <Td>
                       <Typography textColor="neutral800">
-                        {formatMessage(messages.description)}
+                        {formatMessage({
+                          id: `global.plugins.${plugin.name}.description`,
+                          defaultMessage: plugin.description,
+                        })
                       </Typography>
                     </Td>
                   </Tr>
