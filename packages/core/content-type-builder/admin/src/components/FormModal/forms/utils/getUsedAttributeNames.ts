@@ -27,11 +27,9 @@ export const getUsedAttributeNames = (
   attributes: Array<Attribute>,
   schemaData: SchemaData
 ): Array<string> => {
-  const editedNames = [schemaData.initialData.name, schemaData.modifiedData.name]
-    .filter((name): name is string => Boolean(name))
-    .map((name) => snakeCase(name));
-
-  const isEditedAttribute = (name: string) => editedNames.includes(snakeCase(name));
-
-  return attributes.filter(({ name }) => !isEditedAttribute(name)).map(({ name }) => name);
+  return attributes
+    .filter(({ name }) => {
+      return name !== schemaData.initialData.name;
+    })
+    .map(({ name }) => name);
 };
