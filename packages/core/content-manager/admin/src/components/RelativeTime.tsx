@@ -59,8 +59,7 @@ const RelativeTime = React.forwardRef<HTMLTimeElement, RelativeTimeProps>(
         return interval[intervalUnit] > 0 && Object.keys(interval).includes(intervalUnit);
       }) ?? 'seconds';
 
-    const elapsed = Date.now() - timestamp.getTime();
-    const relativeTime = Math.sign(elapsed) * interval[unit];
+    const relativeTime = isPast(timestamp) ? -interval[unit] : interval[unit];
 
     // Display custom text if interval is less than the threshold
     const customInterval = customIntervals.find(
