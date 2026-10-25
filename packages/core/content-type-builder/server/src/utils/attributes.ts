@@ -56,7 +56,7 @@ export const formatAttribute = (attribute: Schema.Attribute.AnyAttribute & Recor
       required: !!required,
       configurable: configurable === false ? false : undefined,
       private: !!attribute.private,
-      ...mediaRestriction(attribute.allowedTypes),
+      allowedTypes: attribute.allowedTypes,
       pluginOptions,
     };
   }
