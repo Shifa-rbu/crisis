@@ -68,7 +68,7 @@ export const createRepository = (uid: string, db: Database): Repository => {
         pagination: {
           page,
           pageSize,
-          pageCount: total === 0 ? 0 : Math.floor(lastRowIndex / pageSize),
+          pageCount: Math.ceil(total / pageSize),
           total,
         },
       };
