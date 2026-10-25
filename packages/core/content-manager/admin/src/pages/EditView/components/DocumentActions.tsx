@@ -1659,7 +1659,7 @@ const UnpublishAction: DocumentActionComponent = ({
                 onValueChange={handleChange}
               >
                 <Radio.Item
-                  checked={draftOption === UNPUBLISH_DRAFT_OPTIONS.KEEP}
+                  checked={draftOption === UNPUBLISH_DRAFT_OPTIONS.DISCARD}
                   value={UNPUBLISH_DRAFT_OPTIONS.KEEP}
                 >
                   {formatMessage({
@@ -1702,7 +1702,7 @@ const UnpublishAction: DocumentActionComponent = ({
                 documentId,
                 params,
               },
-              draftOption === UNPUBLISH_DRAFT_OPTIONS.KEEP
+              draftOption === UNPUBLISH_DRAFT_OPTIONS.DISCARD
             );
           },
         }
