@@ -40,12 +40,12 @@ type AddComponentPosition = 'above' | 'below';
  * dynamic zone. The zone can only hold the positions it already has, so the target is kept
  * within the bounds of the current list.
  */
-const resolveInsertIndex = (index: number, position: AddComponentPosition, totalLength: number) => {
+const resolveInsertIndex = (index: number, position: AddComponentPosition, _totalLength: number) => {
   if (position === 'above') {
     return index;
   }
 
-  return Math.min(index, Math.max(totalLength - 1, 0));
+  return index + 1;
 };
 
 interface DynamicComponentProps
