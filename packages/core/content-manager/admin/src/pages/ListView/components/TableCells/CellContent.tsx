@@ -147,7 +147,7 @@ const hasContent = (
   }
 
   if (attribute.type === 'boolean') {
-    return isDisplayableValue(content);
+    return content !== null;
   }
 
   return !isEmpty(content) && isDisplayableValue(content);
