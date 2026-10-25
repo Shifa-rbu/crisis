@@ -124,12 +124,8 @@ const buildDateClause = (filter: DateFilter, now: Date): QueryClause => {
     };
   }
 
-  const spannedDays = Math.max(
-    0,
-    Math.round((toDate.getTime() - fromDate.getTime()) / MILLISECONDS_PER_DAY)
-  );
   const before = startOfDay(fromDate).toISOString();
-  const after = endOfDay(new Date(fromDate.getTime() + spannedDays)).toISOString();
+  const after = endOfDay(toDate).toISOString();
 
   return { $or: [{ [field]: { $lt: before } }, { [field]: { $gt: after } }] };
 };
