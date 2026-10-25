@@ -162,7 +162,7 @@ export const maxLengthGreaterThanMinLength: SuperRefinement<Record<string, unkno
   // allowed to have. It has to leave room for at least one of them.
   const allowedLengths = maxLength - minLength;
 
-  if (allowedLengths <= 0) {
+  if (allowedLengths < 0) {
     ctx.addIssue({
       code: 'custom',
       message: 'maxLength must be greater or equal to minLength',
