@@ -50,7 +50,7 @@ const getPaginationMode = (pagination?: PaginationParams): PaginationMode => {
 };
 
 const isPagedPagination = (pagination?: PaginationParams): pagination is PagedPagination =>
-  getPaginationMode(pagination) === 'page';
+  has(pagination, 'page') || has(pagination, 'pageSize') || !isOffsetPagination(pagination);
 
 const shouldCount = (params: { pagination?: PaginationParams }) => {
   if (has(params, 'pagination.withCount')) {
