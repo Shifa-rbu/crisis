@@ -11,15 +11,12 @@ export function getPreviewUrlStatus(
     return undefined;
   }
 
-  const hasPublishedVersion = status === 'published' || status === 'modified';
-  const hasDraftVersion = status === 'draft' || status === 'modified';
-
-  if (hasPublishedVersion) {
-    return 'published';
+  if (status === 'draft' || status === 'modified') {
+    return 'draft';
   }
 
-  if (hasDraftVersion) {
-    return 'draft';
+  if (status === 'published') {
+    return 'published';
   }
 
   return undefined;
