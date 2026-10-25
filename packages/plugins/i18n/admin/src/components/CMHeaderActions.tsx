@@ -522,9 +522,7 @@ const FillFromAnotherLocaleAction = ({
     : [];
 
   const fillFromLocale = (onClose: () => void) => async () => {
-    const fillLocales = getFillLocales(currentDesiredLocale, localeSelected);
-
-    if (!fillLocales) {
+    if (!localeSelected || !currentDesiredLocale) {
       return;
     }
 
@@ -532,7 +530,8 @@ const FillFromAnotherLocaleAction = ({
       const { data } = await getFillFromLocaleData({
         model,
         documentId,
-        ...fillLocales,
+        sourceLocale: localeSelected,
+        targetLocale: currentDesiredLocale,
         collectionType: collectionType as 'collection-types' | 'single-types',
       }).unwrap();
 
