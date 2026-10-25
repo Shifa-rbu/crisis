@@ -84,7 +84,7 @@ function array(key: string, defaultValue?: string[]): string[] | undefined {
     value = value.substring(1, value.length - 1);
   }
 
-  return value.split(',').map(unwrapArrayItem);
+  return value.split(',').map((v) => _.trim(_.trim(v, ' '), '"'));
 }
 
 function date(key: string, defaultValue: Date): Date;
