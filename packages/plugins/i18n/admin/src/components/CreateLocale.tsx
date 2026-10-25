@@ -402,9 +402,15 @@ const EnumerationInput = ({
   }, [defaultLocales]);
 
   const handleChange = (value: string) => {
-    onChange(name, value);
-    // This lets us automatically fill the name field with the locale name
-    onChange('name', suggestedNames[value] ?? value);
+    if (Array.isArray(defaultLocales)) {
+      const locale = defaultLocales.find((locale) => locale.code === value);
+      onChange(name, value);
+      if (locale) {
+        onChange('name', locale.name);
+      }
+    } else {
+      onChange(name, value);
+    }
   };
 
   // Find the label for the current value to display in the combobox
