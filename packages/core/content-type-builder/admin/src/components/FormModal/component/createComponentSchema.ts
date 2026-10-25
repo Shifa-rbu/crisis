@@ -68,17 +68,7 @@ export const createComponentSchema = (
       .required(errorsTrads.required.id),
     category: yup
       .string()
-      .test({
-        name: 'categoryNameFormat',
-        message: getTrad('error.category.format'),
-        test(value) {
-          if (!value) {
-            return true;
-          }
-
-          return isValidCategoryName(value);
-        },
-      })
+      .matches(/^[A-Za-z][-_0-9A-Za-z]*$/, getTrad('error.category.format'))
       .required(errorsTrads.required.id),
 
     icon: yup.string(),
