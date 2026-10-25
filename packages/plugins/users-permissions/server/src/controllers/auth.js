@@ -168,7 +168,7 @@ module.exports = ({ strapi }) => ({
       const user = await strapi.db.query('plugin::users-permissions.user').findOne({
         where: {
           provider,
-          $or: [{ email: normalizeEmailIdentifier(identifier) }, { username: identifier }],
+          $or: [{ email: identifier.toLowerCase() }, { username: identifier }],
         },
       });
 
