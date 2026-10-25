@@ -17,13 +17,10 @@ const getCheckboxState = (dataObj: RecursiveRecordOfBooleans): CheckboxState => 
     return { hasAllActionsSelected: false, hasSomeActionsSelected: false };
   }
 
-  return arrayOfValues.reduce<CheckboxState>(
-    (state, value) => ({
-      hasAllActionsSelected: state.hasAllActionsSelected && Boolean(value),
-      hasSomeActionsSelected: state.hasSomeActionsSelected || Boolean(value),
-    }),
-    { hasAllActionsSelected: true, hasSomeActionsSelected: false }
-  );
+  const hasAllActionsSelected = arrayOfValues.every((val) => val);
+  const hasSomeActionsSelected = arrayOfValues.some((val) => val) && !hasAllActionsSelected;
+
+  return { hasAllActionsSelected, hasSomeActionsSelected };
 };
 
 export { getCheckboxState };
