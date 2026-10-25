@@ -50,8 +50,8 @@ const passwordConfirmationField = yup
   .required()
   .test(function passwordsMatch(value) {
     // A reset only carries the new password, a change also carries the one in place.
-    const { password, currentPassword } = this.parent;
-    const expected = currentPassword ?? password;
+    const { password } = this.parent;
+    const expected = password;
 
     if (value !== expected) {
       return this.createError({ message: 'Passwords do not match' });
