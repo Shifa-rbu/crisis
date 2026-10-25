@@ -151,7 +151,7 @@ const RepeatableComponent = ({
    * room left for another entry.
    */
   const lastAllowedIndex = Number.isFinite(max) ? max - 1 : Number.MAX_SAFE_INTEGER;
-  const nextEntryIndex = value.length - 1;
+  const nextEntryIndex = value.length;
   const canAddEntry = nextEntryIndex <= lastAllowedIndex;
 
   const handleClick = () => {
