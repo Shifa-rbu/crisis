@@ -452,19 +452,16 @@ export default ({ strapi }: { strapi: Core.Strapi }) => {
 
     const fileService = getService('file');
 
-    // Fields the request does not carry keep the value they have in database.
-    const keepStored = <T>(value: T | null | undefined, stored: T): T =>
-      _.isNil(value) ? stored : value;
-
-    const folderHasChanged = !_.isNil(folder) && folder !== dbFile.folder;
-
+    const newName = _.isNil(name) ? dbFile.name : name;
     const newInfos = {
-      name: keepStored(name, dbFile.name),
-      alternativeText: keepStored(alternativeText, dbFile.alternativeText),
-      caption: keepStored(caption, dbFile.caption),
-      focalPoint: keepStored(focalPoint, dbFile.focalPoint),
-      folder: keepStored(folder, dbFile.folder),
-      folderPath: folderHasChanged ? await fileService.getFolderPath(folder) : dbFile.folderPath,
+      name: newName,
+      alternativeText: _.isNil(alternativeText) ? dbFile.alternativeText : alternativeText,
+      caption: _.isNil(caption) ? dbFile.caption : caption,
+      focalPoint: _.isNil(focalPoint) ? dbFile.focalPoint : focalPoint,
+      folder: _.isUndefined(folder) ? dbFile.folder : folder,
+      folderPath: _.isUndefined(folder)
+        ? dbFile.folderPath
+        : await fileService.getFolderPath(folder),
     };
 
     return update(id, newInfos, { user });
