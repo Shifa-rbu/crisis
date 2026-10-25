@@ -70,8 +70,20 @@ const EditConfigurationPage = () => {
        */
       const meta = Object.entries(list.metadatas).reduce<Metadatas>(
         (acc, [name, { mainField: _mainField, ...listMeta }]) => {
+          const existingEditMeta = edit.metadatas[name];
+
+          const {
+            __temp_key__,
+            size: _size,
+            name: _name,
+            ...editedMetadata
+          } = data.layout.flatMap((row) => row.children).find((field) => field.name === name) ?? {};
+
           acc[name] = {
-            edit: { ...edit.metadatas[name] },
+            edit: {
+              ...existingEditMeta,
+              ...editedMetadata,
+            },
             list: listMeta,
           };
 
