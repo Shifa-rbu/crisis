@@ -114,16 +114,11 @@ module.exports = {
     }
 
     if (_.has(ctx.request.body, 'username')) {
-      const usersWithSameUsername = await strapi.db
+      const userWithSameUsername = await strapi.db
         .query('plugin::users-permissions.user')
-        .findMany({ where: { username }, select: ['id'] });
+        .findOne({ where: { username } });
 
-      const idsHoldingUsername = new Set(
-        usersWithSameUsername.map((other) => _.toString(other.id))
-      );
-      idsHoldingUsername.delete(_.toString(id));
-
-      if (idsHoldingUsername.size !== usersWithSameUsername.length) {
+      if (userWithSameUsername && _.toString(userWithSameUsername.id) !== _.toString(id)) {
         throw new ApplicationError('Username already taken');
       }
     }
