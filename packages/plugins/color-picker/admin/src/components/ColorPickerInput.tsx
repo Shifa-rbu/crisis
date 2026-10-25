@@ -99,7 +99,8 @@ export const ColorPickerInput = React.forwardRef<HTMLButtonElement, ColorPickerI
      *   if no value is currently set (as `null` really corresponds to no color, not
      *   black), so default to empty string if nothing else is available. */
     const color = field.value ?? props.placeholder ?? '';
-    const { hasColor, isToggleDisabled } = getToggleState(disabled, field.value);
+    const hasColor = field.value !== undefined && field.value !== null && field.value !== '';
+    const isToggleDisabled = disabled;
 
     const composedRefs = useComposedRefs(forwardedRef, colorPickerButtonRef);
 
