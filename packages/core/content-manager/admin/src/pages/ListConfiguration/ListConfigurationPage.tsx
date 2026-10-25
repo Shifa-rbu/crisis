@@ -62,7 +62,7 @@ const ListConfiguration = () => {
        */
       const editedFields = layoutData.reduce<Record<string, FormData['layout'][number]>>(
         (acc, field) => {
-          acc[field.label] = field;
+          acc[field.name] = field;
 
           return acc;
         },
