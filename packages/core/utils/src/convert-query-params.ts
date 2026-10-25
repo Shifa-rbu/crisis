@@ -783,8 +783,8 @@ const createTransformer = ({ getModel }: TransformerOptions) => {
       }
 
       // Handle operators
-      else if (NULL_OPERATORS.includes(key)) {
-        normalizeNullOperator(filters as WhereQuery, key);
+      else if (['$null', '$notNull'].includes(key)) {
+        filters[key] = parseType({ type: 'boolean', value: filters[key], forceCast: true });
       } else if (isObject(value)) {
         filters[key] = convertAndSanitizeFilters(value, schema);
       }
