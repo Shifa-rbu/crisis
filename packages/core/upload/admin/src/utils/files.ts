@@ -1,7 +1,7 @@
 const MAX_URLS = 20;
 
 const BYTE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB'];
-const BYTE_UNIT_STEP = 1000;
+const BYTE_UNIT_STEP = 1024;
 
 /**
  * Formats a byte value into a human-readable string with units.
