@@ -775,10 +775,10 @@ const TableActionsBar = () => {
       return;
     }
 
-    const availableDocumentIds = new Set(rows.map((row) => row.documentId));
-
-    selectRow(selectedRows.filter((row) => availableDocumentIds.has(row.documentId)));
-  }, [selectRow, prevLocale, locale, rows, selectedRows]);
+    if (prevLocale !== locale) {
+      selectRow([]);
+    }
+  }, [selectRow, prevLocale, locale]);
 
   return (
     <Table.ActionBar>
