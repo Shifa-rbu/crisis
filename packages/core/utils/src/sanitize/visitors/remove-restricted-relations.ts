@@ -212,8 +212,7 @@ const visitRelationAttribute = async (
   };
 
   const handleRegularRelation = async () => {
-    const target = getRelationTarget(schema, attribute);
-    const scopes = ACTIONS_TO_VERIFY.map((action) => `${target}.${action}`);
+    const scopes = ACTIONS_TO_VERIFY.map((action) => `${attribute.target}.${action}`);
     const isAllowed = await hasAccessToSomeScopes(scopes, auth);
 
     if (!isAllowed) {
