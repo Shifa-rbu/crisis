@@ -31,7 +31,7 @@ const hasValidHostLabels = (url: string) => {
     const [subdomain, ...parents] = new URL(url).hostname.split('.');
 
     return (
-      /^[a-z\u00a1-\uffff0-9_]+$/i.test(subdomain) &&
+      hostLabelRegex.test(subdomain) &&
       parents.every((label) => hostLabelRegex.test(label))
     );
   } catch {
