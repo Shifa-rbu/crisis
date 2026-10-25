@@ -175,9 +175,8 @@ export const listHandler = (
               doc.replaceRange('', { line: i, ch: 0 }, { line: i, ch: insertion.length });
             }
           } else {
-            const positionInList = i - pos[0];
-
-            doc.replaceRange(getListItemMarker(listType, positionInList), { line: i, ch: 0 });
+            const lineInsertion = listType === 'BulletList' ? '- ' : `${i - pos[0] + 1}. `;
+            doc.replaceRange(lineInsertion, { line: i, ch: 0 });
           }
         }
       });
