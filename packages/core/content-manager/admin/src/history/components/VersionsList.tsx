@@ -188,7 +188,7 @@ const VersionsListItems = () => {
               defaultMessage: 'Version card',
             })}
           >
-            <VersionCard version={version} isCurrent={version.id === latestVersionId} />
+            <VersionCard version={version} isCurrent={page === 1 && version.id === latestVersionId} />
           </li>
         ))}
       </Flex>
